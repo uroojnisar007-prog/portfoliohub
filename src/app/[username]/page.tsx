@@ -39,7 +39,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
       description: profile.bio || `Check out ${user.name}'s professional portfolio.`,
       url: `https://portfoliohub.vercel.app/${username}`,
       siteName: 'PortfolioHub',
-      images: [{ url: user.image || 'https://via.placeholder.com/800x600.png?text=PortfolioHub', width: 800, height: 600 }],
+      images: [{ url: user.image ? user.image : 'https://via.placeholder.com/800x600.png?text=PortfolioHub', width: 800, height: 600 }],
       locale: 'en_US',
       type: 'website',
     },
@@ -104,7 +104,7 @@ export default async function PublicPortfolio(props: {
               {user.image ? (
                 <img
                   src={user.image}
-                  alt={user.name}
+                  alt={user.name || "Profile"}
                   className="h-32 w-32 rounded-full border-4 border-white bg-white object-cover shadow-md md:h-40 md:w-40"
                 />
               ) : (
