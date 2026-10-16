@@ -62,6 +62,9 @@ export default async function PublicPortfolio(props: {
   const userResult = await db.select().from(users).where(eq(users.id, userId));
   const user = userResult[0];
 
+  // Safe image string conversion to prevent TS errors
+  const safeImage: string | undefined = user.image ? user.image : undefined;
+
   const userProjects = await db.select().from(projects).where(eq(projects.userId, userId));
   const userEducation = await db.select().from(education).where(eq(education.userId, userId));
   const skillsArray = profile?.skills
@@ -100,9 +103,9 @@ export default async function PublicPortfolio(props: {
           <div className="px-6 pb-10 sm:px-10">
             {/* Profile image */}
             <div className="-mt-16 mb-5 md:-mt-20">
-              {user.image ? (
+              {safeImage ? (
                 <img
-                  src={user.image}
+                  src={safeImage}
                   alt={user.name || "Profile"}
                   className="h-32 w-32 rounded-full border-4 border-white bg-white object-cover shadow-md md:h-40 md:w-40"
                 />
