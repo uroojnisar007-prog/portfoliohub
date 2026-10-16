@@ -31,6 +31,8 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
   const userResult = await db.select().from(users).where(eq(users.id, profile.userId));
   const user = userResult[0];
 
+  const imageUrl = user.image ? user.image : 'https://via.placeholder.com/800x600.png?text=PortfolioHub';
+
   return {
     title: `${user.name} | ${profile.title || 'Portfolio'}`,
     description: profile.bio || `Check out ${user.name}'s professional portfolio.`,
@@ -39,7 +41,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
       description: profile.bio || `Check out ${user.name}'s professional portfolio.`,
       url: `https://portfoliohub.vercel.app/${username}`,
       siteName: 'PortfolioHub',
-      images: [{ url: user.image ? user.image : 'https://via.placeholder.com/800x600.png?text=PortfolioHub', width: 800, height: 600 }],
+      images: [{ url: imageUrl, width: 800, height: 600 }],
       locale: 'en_US',
       type: 'website',
     },
@@ -221,7 +223,7 @@ export default async function PublicPortfolio(props: {
           <section className="mb-8" aria-labelledby="projects-heading">
             <div className="mb-6 flex items-center gap-3 border-b border-slate-200 pb-4">
               <div className="rounded-lg bg-emerald-50 p-2.5 text-[#0f5132]">
-                <Briefcase size={22} aria-hidden="true" />
+                <Briefcase size={22} aria-hidden="test" />
               </div>
               <h2 id="projects-heading" className={sectionTitleClass}>
                 Projects
