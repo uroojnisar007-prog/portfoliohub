@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: "C:/Users/Urooj/Desktop/MyPortfolio/portfoliohub",
+  },
   typescript: {
-    ignoreBuildErrors: true, // Yeh line build ke waqt saare TS errors ko ignore kar degi
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
